@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.sensorexplorer.R
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -37,14 +38,11 @@ class GeolocationFragment : Fragment(), OnMapReadyCallback {
         mapView = view.findViewById(R.id.mapView)
         btnGetLocation = view.findViewById(R.id.btn_get_location)
 
-        // Initialiser le client de localisation
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        // Initialiser la carte
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
 
-        // Gérer le clic sur le bouton
         btnGetLocation.setOnClickListener {
             getLocation()
         }
@@ -65,12 +63,7 @@ class GeolocationFragment : Fragment(), OnMapReadyCallback {
                 requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ), 100
-            )
+            checkLocationPermission()
             return
         }
 
@@ -81,9 +74,58 @@ class GeolocationFragment : Fragment(), OnMapReadyCallback {
                 googleMap?.addMarker(MarkerOptions().position(latLng).title("Your Location"))
                 googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
             } else {
-                Toast.makeText(requireContext(), "Unable to get location", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Getting last location failed. Requesting a new location...", Toast.LENGTH_SHORT).show()
+                requestNewLocationData()
             }
         }
+    }
+
+    private fun requestNewLocationData() {
+        val locationRequest = LocationRequest.create().apply {
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            interval = 10000
+            fastestInterval = 5000
+            numUpdates = 1
+        }
+
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+
+        fusedLocationClient.requestLocationUpdates(locationRequest, object :
+            com.google.android.gms.location.LocationCallback() {
+            override fun onLocationResult(locationResult: com.google.android.gms.location.LocationResult) {
+                val location = locationResult.lastLocation
+                if (location != null) {
+                    val latLng = LatLng(location.latitude, location.longitude)
+                    googleMap?.clear()
+                    googleMap?.addMarker(MarkerOptions().position(latLng).title("Your Location"))
+                    googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                } else {
+                    Toast.makeText(requireContext(), "Location update failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }, null)
+    }
+
+
+    private fun checkLocationPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        ) {
+            Toast.makeText(requireContext(), "Location permission is needed to show your position", Toast.LENGTH_LONG).show()
+        }
+        requestPermissions(
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+            100
+        )
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
