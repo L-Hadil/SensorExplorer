@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Thème principal de l'application -->
+    <style name="Theme.SensorExplorer" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Couleurs principales -->
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorPrimaryVariant">@color/blue_variant</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Couleurs secondaires -->
+        <item name="colorSecondary">@color/black</item>
+        <item name="colorSecondaryVariant">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Couleur de la barre d'état -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <!-- Couleur de fond globale -->
+        <item name="android:colorBackground">@color/black</item>
+
+        <!-- Personnalisation des boutons -->
+        <item name="colorButtonNormal">@color/primary_blue</item>
+
+        <!-- Couleur des textes et icônes -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/blue_variant</item>
+        <item name="android:navigationBarColor">@color/black</item>
+    </style>
+
+</resources>

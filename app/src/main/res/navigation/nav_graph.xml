@@ -1,0 +1,46 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.sensorexplorer.fragments.HomeFragment"
+        android:label="Home" />
+
+    <fragment
+        android:id="@+id/sensorsListFragment"
+        android:name="com.example.sensorexplorer.fragments.SensorsListFragment"
+        android:label="Sensor List" />
+
+
+      <fragment
+          android:id="@+id/sensorAvailabilityFragment"
+          android:name="com.example.sensorexplorer.fragments.SensorAvailabilityFragment"
+          android:label="Sensor Availability" />
+
+      <fragment
+          android:id="@+id/accelerometerFragment"
+          android:name="com.example.sensorexplorer.fragments.AccelerometerFragment"
+          android:label="Accelerometer" />
+
+      <fragment
+          android:id="@+id/directionFragment"
+          android:name="com.example.sensorexplorer.fragments.DirectionFragment"
+          android:label="Direction Detection" />
+
+      <fragment
+          android:id="@+id/shakeFlashFragment"
+          android:name="com.example.sensorexplorer.fragments.ShakeFlashFragment"
+          android:label="Shake to Flash" />
+
+      <fragment
+          android:id="@+id/proximityFragment"
+          android:name="com.example.sensorexplorer.fragments.ProximityFragment"
+          android:label="Proximity Sensor" />
+
+      <fragment
+          android:id="@+id/geolocationFragment"
+          android:name="com.example.sensorexplorer.fragments.GeolocationFragment"
+          android:label="Geolocation" />
+      -->
+</navigation>

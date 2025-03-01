@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@drawable/backgroundpic">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:cardCornerRadius="24dp"
+        app:cardBackgroundColor="@color/white"
+        android:elevation="8dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp">
+
+            <!-- Grille des flèches -->
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:rowCount="3"
+                android:paddingBottom="16dp">
+
+                <ImageView
+                    android:id="@+id/arrow_top_left"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/arrow"
+                    android:rotation="-45"
+                    app:tint="@color/black" />
+
+                <ImageView
+                    android:id="@+id/arrow_up"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/arrow"
+                    android:rotation="0"
+                    app:tint="@color/black" />
+
+                <ImageView
+                    android:id="@+id/arrow_top_right"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/arrow"
+                    android:rotation="45"
+                    app:tint="@color/black" />
+
+                <ImageView
+                    android:id="@+id/arrow_left"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/arrow"
+                    android:rotation="-90"
+                    app:tint="@color/black" />
+
+                <!-- Case centrale vide -->
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+
+                <ImageView
+                    android:id="@+id/arrow_right"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/arrow"
+                    android:rotation="90"
+                    app:tint="@color/black" />
+
+                <ImageView
+                    android:id="@+id/arrow_bottom_left"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/arrow"
+                    android:rotation="-135"
+                    app:tint="@color/black" />
+
+                <ImageView
+                    android:id="@+id/arrow_down"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/arrow"
+                    android:rotation="180"
+                    app:tint="@color/black" />
+
+                <ImageView
+                    android:id="@+id/arrow_bottom_right"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/arrow"
+                    android:rotation="135"
+                    app:tint="@color/black" />
+            </GridLayout>
+
+            <TextView
+                android:id="@+id/text_direction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Direction: Stationary"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_con"
+                android:gravity="center"
+                android:paddingTop="12dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
